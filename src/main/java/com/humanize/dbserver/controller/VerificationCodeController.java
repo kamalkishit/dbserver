@@ -17,22 +17,22 @@ public class VerificationCodeController {
 	@Autowired
 	VerificationCodeService verificationCodeService;
 	
-	@RequestMapping("/invitationCode/create")
+	@RequestMapping("/verificationCode/create")
 	public ResponseEntity<VerificationCode> create(@RequestBody VerificationCode verificationCode) {
 		return new ResponseEntity<VerificationCode>(verificationCodeService.create(verificationCode), HttpStatus.OK);
 	}
 	
-	@RequestMapping("/invitationCode/update")
+	@RequestMapping("/verificationCode/update")
 	public ResponseEntity<VerificationCode> update(@RequestBody VerificationCode verificationCode) {
 		return new ResponseEntity<VerificationCode>(verificationCodeService.update(verificationCode), HttpStatus.OK);
 	}
 	
-	@RequestMapping("/invitationCode/find")
+	@RequestMapping("/verificationCode/find")
 	public ResponseEntity<VerificationCode> findByEmailId(@RequestParam("emailId") String emailId) {
 		return new ResponseEntity<VerificationCode>(verificationCodeService.findByEmailId(emailId), HttpStatus.OK);
 	}
 	
-	@RequestMapping("/invitationCode/delete")
+	@RequestMapping("/verificationCode/delete")
 	public ResponseEntity<Boolean> signup(@RequestBody VerificationCode verificationCode) {
 		return new ResponseEntity<Boolean>(verificationCodeService.delete(verificationCode), HttpStatus.OK);
 	}

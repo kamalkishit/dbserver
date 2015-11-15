@@ -1,10 +1,12 @@
 package com.humanize.dbserver.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.humanize.dbserver.dao.UserRepository;
 import com.humanize.dbserver.data.User;
 
+@Service
 public class UserRepositoryService {
 
 	@Autowired
