@@ -23,6 +23,11 @@ public class PaperController {
 		return new ResponseEntity<Paper>(paperService.create(paper), HttpStatus.OK);
 	}
 	
+	@RequestMapping("/paper/update")
+	public ResponseEntity<Paper> update(@RequestBody Paper paper) {
+		return new ResponseEntity<Paper>(paperService.update(paper), HttpStatus.OK);
+	}
+	
 	@RequestMapping("/paper/find")
 	public ResponseEntity<Contents> findByDate(@RequestParam("paperDate") String paperDate) {
 		return new ResponseEntity<Contents>(paperService.findByDate(paperDate), HttpStatus.OK);

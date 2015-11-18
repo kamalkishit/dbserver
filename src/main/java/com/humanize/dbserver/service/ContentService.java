@@ -22,8 +22,14 @@ public class ContentService {
 		return repositoryService.update(content);
 	}
 	
-	public Contents findByCategory(String category) {
-		return repositoryService.findByCategory(category);
+	public Contents findByCategory(String category, Long createdDate, boolean refresh) {
+		if (createdDate == null) {
+			return repositoryService.findByCategory(category);
+		} else if (refresh) {
+			return repositoryService.findNewByCategory(category, createdDate);
+		} else {
+			return repositoryService.findMoreByCategory(category, createdDate);
+		}
 	}
 	
 	public Contents findByCategory(String category, long createdDate, boolean refresh) {
@@ -38,12 +44,14 @@ public class ContentService {
 		return repositoryService.findByCategories(categories);
 	}
 	
-	public Contents findByCategories(List<String> categories, long createdDate, boolean refresh) {
-		if (refresh) {
+	public Contents findByCategories(List<String> categories, Long createdDate, boolean refresh) {
+		if (createdDate == null) {
+			return repositoryService.findByCategories(categories);
+		} else if (refresh) {
 			return repositoryService.findNewByCategories(categories, createdDate);
+		} else {
+			return repositoryService.findMoreByCategories(categories, createdDate);
 		}
-		
-		return repositoryService.findMoreByCategories(categories, createdDate);
 	}
 	
 	public Contents findByIds(List<String> ids) {

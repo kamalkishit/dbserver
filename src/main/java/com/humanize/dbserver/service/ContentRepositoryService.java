@@ -9,9 +9,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.humanize.dbserver.ExceptionConfig;
 import com.humanize.dbserver.dao.ContentRepository;
 import com.humanize.dbserver.data.Content;
 import com.humanize.dbserver.data.Contents;
+import com.humanize.dbserver.exception.ContentCreationException;
+import com.humanize.dbserver.exception.ContentNotFoundException;
+import com.humanize.dbserver.exception.ContentUpdationException;
 
 @Service
 public class ContentRepositoryService {
@@ -23,7 +27,7 @@ public class ContentRepositoryService {
 		content = repository.save(content);
 		
 		if (content == null) {
-			
+			throw new ContentCreationException(ExceptionConfig.CONTENT_CREATION_ERROR_CODE, ExceptionConfig.CONTENT_CREATION_EXCEPTION);
 		}
 		
 		return content;
@@ -33,7 +37,7 @@ public class ContentRepositoryService {
 		content = repository.save(content);
 		
 		if (content == null) {
-			
+			throw new ContentUpdationException(ExceptionConfig.CONTENT_UPDATION_ERROR_CODE, ExceptionConfig.CONTENT_UPDATION_EXCEPTION);
 		}
 		
 		return content;
@@ -48,7 +52,7 @@ public class ContentRepositoryService {
 			return new Contents(contents);
 		}
 		
-		return null;
+		throw new ContentNotFoundException(ExceptionConfig.CONTENT_NOT_FOUND_ERROR_CODE, ExceptionConfig.CONTENT_NOT_FOUND_EXCEPTION);
 	}
 	
 	public Contents findNewByCategory(String category, long createdDate) {
@@ -84,7 +88,7 @@ public class ContentRepositoryService {
 			return new Contents(contents);
 		}
 		
-		return null;
+		throw new ContentNotFoundException(ExceptionConfig.CONTENT_NOT_FOUND_ERROR_CODE, ExceptionConfig.CONTENT_NOT_FOUND_EXCEPTION);
 	}
 	
 	public Contents findNewByCategories(List<String> categories, long createdDate) {
@@ -96,7 +100,7 @@ public class ContentRepositoryService {
 			return new Contents(contents);
 		}
 		
-		return null;
+		throw new ContentNotFoundException(ExceptionConfig.CONTENT_NOT_FOUND_ERROR_CODE, ExceptionConfig.CONTENT_NOT_FOUND_EXCEPTION);
 	}
 	
 	public Contents findMoreByCategories(List<String> categories, long createdDate) {
@@ -108,7 +112,7 @@ public class ContentRepositoryService {
 			return new Contents(contents);
 		}
 		
-		return null;
+		throw new ContentNotFoundException(ExceptionConfig.CONTENT_NOT_FOUND_ERROR_CODE, ExceptionConfig.CONTENT_NOT_FOUND_EXCEPTION);
 	}
 	
 	public Contents findByIds(List<String> ids) {
@@ -118,7 +122,7 @@ public class ContentRepositoryService {
 			return new Contents(contents);
 		}
 		
-		return null;
+		throw new ContentNotFoundException(ExceptionConfig.CONTENT_NOT_FOUND_ERROR_CODE, ExceptionConfig.CONTENT_NOT_FOUND_EXCEPTION);
 	}
 	
 	private Pageable createPagination(Direction direction, String field) {

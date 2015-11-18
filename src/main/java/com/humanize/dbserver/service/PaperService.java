@@ -14,12 +14,22 @@ public class PaperService {
 	
 	@Autowired
 	ContentService contentService;
+	
+	@Autowired
+	InputValidationService inputValidator;
 
 	public Paper create(Paper paper) {
+		inputValidator.validatePaper(paper);
 		return repositoryService.create(paper);
 	}
 	
+	public Paper update(Paper paper) {
+		inputValidator.validatePaper(paper);
+		return repositoryService.update(paper);
+	}
+	
 	public Contents findByDate(String paperDate) {
+		inputValidator.validatePaperDate(paperDate);
 		Paper paper = repositoryService.findByDate(paperDate);
 		
 		return contentService.findByIds(paper.getContentIds());

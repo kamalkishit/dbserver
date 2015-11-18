@@ -12,9 +12,6 @@ public class Paper {
 	
 	@Id
 	private String id;
-
-	@Indexed(unique = true)
-	private String paperId;
 	
 	@Indexed(unique = true)
 	private String paperDate;
@@ -28,6 +25,7 @@ public class Paper {
 	private long lastModifiedDate;
 	
 	public Paper() {
+		paperDate = null;
 		contentIds = new ArrayList<>();
 	}
 
@@ -37,14 +35,6 @@ public class Paper {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getPaperId() {
-		return paperId;
-	}
-
-	public void setPaperId(String paperId) {
-		this.paperId = paperId;
 	}
 
 	public List<String> getContentIds() {
