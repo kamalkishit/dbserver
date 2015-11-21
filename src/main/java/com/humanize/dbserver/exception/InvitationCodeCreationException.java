@@ -2,12 +2,12 @@ package com.humanize.dbserver.exception;
 
 import java.lang.Exception;
 
-public class ContentDeletionException extends Exception {
-
+public class InvitationCodeCreationException extends Exception {
+	
 	private int errorCode;
 	private String errorMsg;
 	
-	public ContentDeletionException(int errorCode, String errorMsg) {
+	public InvitationCodeCreationException(int errorCode, String errorMsg) {
 		this.errorCode = errorCode;
 		this.errorMsg = errorMsg;
 	}
@@ -27,4 +27,5 @@ public class ContentDeletionException extends Exception {
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
 	}
+
 }

@@ -2,12 +2,12 @@ package com.humanize.dbserver.exception;
 
 import java.lang.Exception;
 
-public class ContentDeletionException extends Exception {
+public class VerificationCodeNotFoundException extends Exception {
 
 	private int errorCode;
 	private String errorMsg;
 	
-	public ContentDeletionException(int errorCode, String errorMsg) {
+	public VerificationCodeNotFoundException(int errorCode, String errorMsg) {
 		this.errorCode = errorCode;
 		this.errorMsg = errorMsg;
 	}

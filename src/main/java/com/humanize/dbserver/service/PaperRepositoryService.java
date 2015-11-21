@@ -16,7 +16,7 @@ public class PaperRepositoryService {
 	@Autowired
 	PaperRepository repository;
 	
-	public Paper create(Paper paper) {
+	public Paper create(Paper paper) throws PaperCreationException {
 		paper = repository.save(paper);
 		
 		if (paper == null) {
@@ -26,11 +26,11 @@ public class PaperRepositoryService {
 		return paper;
 	}
 	
-	public Paper update(Paper paper) {
+	public Paper update(Paper paper) throws PaperUpdationException {
 		Paper tempPaper = repository.findByPaperDate(paper.getPaperDate());
 		
 		if (tempPaper == null) {
-			throw new PaperNotFoundException(ExceptionConfig.PAPER_NOT_FOUND_ERROR_CODE, ExceptionConfig.PAPER_NOT_FOUND_EXCEPTION);
+			throw new PaperUpdationException(ExceptionConfig.PAPER_UPDATION_ERROR_CODE, ExceptionConfig.PAPER_UPDATION_EXCEPTION);
 		}
 		
 		tempPaper.setContentIds(paper.getContentIds());
@@ -44,7 +44,7 @@ public class PaperRepositoryService {
 		return tempPaper;
 	}
 	
-	public Paper findByDate(String paperDate) {
+	public Paper findByDate(String paperDate) throws PaperNotFoundException {
 		Paper paper = repository.findByPaperDate(paperDate);
 		
 		if (paper == null) {

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.humanize.dbserver.data.Content;
 import com.humanize.dbserver.data.Contents;
+import com.humanize.dbserver.exception.ContentCreationException;
+import com.humanize.dbserver.exception.ContentNotFoundException;
+import com.humanize.dbserver.exception.ContentUpdationException;
 
 @Service
 public class ContentService {
@@ -14,37 +17,15 @@ public class ContentService {
 	@Autowired
 	private ContentRepositoryService repositoryService;
 
-	public Content create(Content content) {
+	public Content create(Content content) throws ContentCreationException {
 		return repositoryService.create(content);
 	}
 	
-	public Content update(Content content) {
+	public Content update(Content content) throws ContentUpdationException {
 		return repositoryService.update(content);
 	}
 	
-	public Contents findByCategory(String category, Long createdDate, boolean refresh) {
-		if (createdDate == null) {
-			return repositoryService.findByCategory(category);
-		} else if (refresh) {
-			return repositoryService.findNewByCategory(category, createdDate);
-		} else {
-			return repositoryService.findMoreByCategory(category, createdDate);
-		}
-	}
-	
-	public Contents findByCategory(String category, long createdDate, boolean refresh) {
-		if (refresh) {
-			return repositoryService.findNewByCategory(category, createdDate);
-		}
-		
-		return repositoryService.findMoreByCategory(category, createdDate);
-	}
-	
-	public Contents findByCategories(List<String> categories) {
-		return repositoryService.findByCategories(categories);
-	}
-	
-	public Contents findByCategories(List<String> categories, Long createdDate, boolean refresh) {
+	public Contents findByCategories(List<String> categories, Long createdDate, boolean refresh) throws ContentNotFoundException {
 		if (createdDate == null) {
 			return repositoryService.findByCategories(categories);
 		} else if (refresh) {
@@ -54,7 +35,7 @@ public class ContentService {
 		}
 	}
 	
-	public Contents findByIds(List<String> ids) {
+	public Contents findByIds(List<String> ids) throws ContentNotFoundException {
 		return repositoryService.findByIds(ids);
 	}
 

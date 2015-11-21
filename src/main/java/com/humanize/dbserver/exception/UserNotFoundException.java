@@ -1,6 +1,8 @@
 package com.humanize.dbserver.exception;
 
-public class UserNotFoundException extends RuntimeException {
+import java.lang.Exception;
+
+public class UserNotFoundException extends Exception {
 
 	private int errorCode;
 	private String errorMsg;

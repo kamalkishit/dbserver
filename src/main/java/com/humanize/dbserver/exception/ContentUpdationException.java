@@ -1,6 +1,8 @@
 package com.humanize.dbserver.exception;
 
-public class ContentUpdationException extends RuntimeException {
+import java.lang.Exception;
+
+public class ContentUpdationException extends Exception {
 	
 	private int errorCode;
 	private String errorMsg;

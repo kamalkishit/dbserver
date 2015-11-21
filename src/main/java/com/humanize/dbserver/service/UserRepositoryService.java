@@ -16,7 +16,7 @@ public class UserRepositoryService {
 	@Autowired
 	UserRepository repository;
 	
-	public User create(User user) {
+	public User create(User user) throws UserCreationException {
 		user = repository.save(user);
 		
 		if (user == null) {
@@ -26,7 +26,7 @@ public class UserRepositoryService {
 		return user;
 	}
 	
-	public User update(User user) {
+	public User update(User user) throws UserUpdationException {
 		user = repository.save(user);
 		
 		if (user == null) {
@@ -36,7 +36,7 @@ public class UserRepositoryService {
 		return user;
 	}
 	
-	public User findByEmailId(String emailId) {
+	public User findByEmailId(String emailId) throws UserNotFoundException {
 		User user = repository.findByEmailId(emailId);
 		
 		if (user == null) {

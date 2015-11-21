@@ -23,7 +23,7 @@ public class ContentRepositoryService {
 	@Autowired
 	ContentRepository repository;
 	
-	public Content create(Content content) {
+	public Content create(Content content) throws ContentCreationException {
 		content = repository.save(content);
 		
 		if (content == null) {
@@ -33,7 +33,7 @@ public class ContentRepositoryService {
 		return content;
 	}
 	
-	public Content update(Content content) {
+	public Content update(Content content) throws ContentUpdationException {
 		content = repository.save(content);
 		
 		if (content == null) {
@@ -43,43 +43,7 @@ public class ContentRepositoryService {
 		return content;
 	}
 	
-	public Contents findByCategory(String category) {
-		Pageable pageRequest = createPagination(Direction.DESC, "createdDate");
-		
-		List<Content> contents = repository.findByCategory(category, pageRequest);
-		
-		if (contents != null && contents.size() > 0) {
-			return new Contents(contents);
-		}
-		
-		throw new ContentNotFoundException(ExceptionConfig.CONTENT_NOT_FOUND_ERROR_CODE, ExceptionConfig.CONTENT_NOT_FOUND_EXCEPTION);
-	}
-	
-	public Contents findNewByCategory(String category, long createdDate) {
-		Pageable pageRequest = createPagination(Direction.DESC, "createdDate");
-		
-		List<Content> contents = repository.findNewByCategory(category, createdDate, pageRequest);
-		
-		if (contents != null && contents.size() > 0) {
-			return new Contents(contents);
-		}
-		
-		return null;
-	}
-	
-	public Contents findMoreByCategory(String category, long createdDate) {
-		Pageable pageRequest = createPagination(Direction.DESC, "createdDate");
-		
-		List<Content> contents = repository.findMoreByCategory(category, createdDate, pageRequest);
-		
-		if (contents != null && contents.size() > 0) {
-			return new Contents(contents);
-		}
-		
-		return null;
-	}
-	
-	public Contents findByCategories(List<String> categories) {
+	public Contents findByCategories(List<String> categories) throws ContentNotFoundException {
 		Pageable pageRequest = createPagination(Direction.DESC, "createdDate");
 		
 		List<Content> contents = repository.findByCategories(categories, pageRequest);
@@ -91,7 +55,7 @@ public class ContentRepositoryService {
 		throw new ContentNotFoundException(ExceptionConfig.CONTENT_NOT_FOUND_ERROR_CODE, ExceptionConfig.CONTENT_NOT_FOUND_EXCEPTION);
 	}
 	
-	public Contents findNewByCategories(List<String> categories, long createdDate) {
+	public Contents findNewByCategories(List<String> categories, long createdDate) throws ContentNotFoundException {
 		Pageable pageRequest = createPagination(Direction.DESC, "createdDate");
 		
 		List<Content> contents = repository.findNewByCategories(categories, createdDate, pageRequest);
@@ -103,7 +67,7 @@ public class ContentRepositoryService {
 		throw new ContentNotFoundException(ExceptionConfig.CONTENT_NOT_FOUND_ERROR_CODE, ExceptionConfig.CONTENT_NOT_FOUND_EXCEPTION);
 	}
 	
-	public Contents findMoreByCategories(List<String> categories, long createdDate) {
+	public Contents findMoreByCategories(List<String> categories, long createdDate) throws ContentNotFoundException {
 		Pageable pageRequest = createPagination(Direction.DESC, "createdDate");
 		
 		List<Content> contents = repository.findMoreByCategories(categories, createdDate, pageRequest);
@@ -115,7 +79,7 @@ public class ContentRepositoryService {
 		throw new ContentNotFoundException(ExceptionConfig.CONTENT_NOT_FOUND_ERROR_CODE, ExceptionConfig.CONTENT_NOT_FOUND_EXCEPTION);
 	}
 	
-	public Contents findByIds(List<String> ids) {
+	public Contents findByIds(List<String> ids) throws ContentNotFoundException {
 		List<Content> contents = repository.findAll(ids);
 		
 		if (contents != null && contents.size() >0) {

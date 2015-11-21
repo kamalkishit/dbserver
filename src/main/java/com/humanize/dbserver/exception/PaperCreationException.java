@@ -1,6 +1,8 @@
 package com.humanize.dbserver.exception;
 
-public class PaperCreationException extends RuntimeException {
+import java.lang.Exception;
+
+public class PaperCreationException extends Exception {
 
 	private int errorCode;
 	private String errorMsg;

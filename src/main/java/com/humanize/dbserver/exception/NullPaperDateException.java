@@ -1,6 +1,8 @@
 package com.humanize.dbserver.exception;
 
-public class NullPaperDateException extends RuntimeException {
+import java.lang.Exception;
+
+public class NullPaperDateException extends Exception {
 
 	private int errorCode;
 	private String errorMsg;
