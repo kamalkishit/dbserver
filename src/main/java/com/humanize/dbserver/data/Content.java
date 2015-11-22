@@ -2,6 +2,7 @@ package com.humanize.dbserver.data;
 
 import java.util.ArrayList;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -17,6 +18,7 @@ public class Content {
 	@Indexed(unique = true)
 	private String contentId;
 
+	@NotEmpty
 	@Indexed(unique = true)
 	private String contentURL;
 
@@ -34,6 +36,7 @@ public class Content {
 
 	private String contentType;
 
+	@NotEmpty
 	private String category;
 
 	private ArrayList<String> subCategories;

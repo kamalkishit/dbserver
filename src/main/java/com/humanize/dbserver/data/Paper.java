@@ -3,6 +3,7 @@ package com.humanize.dbserver.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -13,6 +14,7 @@ public class Paper {
 	@Id
 	private String id;
 	
+	@NotEmpty
 	@Indexed(unique = true)
 	private String paperDate;
 	

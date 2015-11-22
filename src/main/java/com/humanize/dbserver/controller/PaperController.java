@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.humanize.dbserver.data.Contents;
 import com.humanize.dbserver.data.Paper;
+import com.humanize.dbserver.exception.PaperContentNotFoundException;
 import com.humanize.dbserver.exception.PaperCreationException;
 import com.humanize.dbserver.exception.PaperNotFoundException;
 import com.humanize.dbserver.exception.PaperUpdationException;
@@ -32,7 +33,7 @@ public class PaperController {
 	}
 	
 	@RequestMapping("/paper/find")
-	public ResponseEntity<Contents> findByDate(@RequestParam("paperDate") String paperDate) throws PaperNotFoundException{
+	public ResponseEntity<Contents> findByDate(@RequestParam("paperDate") String paperDate) throws PaperNotFoundException, PaperContentNotFoundException {
 		return new ResponseEntity<Contents>(paperService.findByDate(paperDate), HttpStatus.OK);
 	}
 }

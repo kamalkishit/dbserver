@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -20,9 +21,11 @@ public class User {
 	@Indexed(unique = true)
 	private String userId;
 
+	@NotEmpty
 	@Indexed(unique = true)
 	private String emailId;
 
+	@NotEmpty
 	private String password;
 	
 	private String tempPassword;

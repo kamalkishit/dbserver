@@ -1,5 +1,7 @@
 package com.humanize.dbserver.data;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,9 +12,12 @@ public class InvitationCode {
 	@Id
 	private String id;
 
+	@NotEmpty
+	@Email
 	@Indexed(unique = true)
 	private String emailId;
 	
+	@NotEmpty
 	private String invitationCode;
 	
 	public InvitationCode() {

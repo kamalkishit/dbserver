@@ -2,6 +2,8 @@ package com.humanize.dbserver.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +12,15 @@ import com.humanize.dbserver.data.Contents;
 import com.humanize.dbserver.exception.ContentCreationException;
 import com.humanize.dbserver.exception.ContentNotFoundException;
 import com.humanize.dbserver.exception.ContentUpdationException;
+import com.humanize.dbserver.exception.PaperContentNotFoundException;
 
 @Service
 public class ContentService {
 	
 	@Autowired
 	private ContentRepositoryService repositoryService;
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public Content create(Content content) throws ContentCreationException {
 		return repositoryService.create(content);
@@ -35,8 +40,14 @@ public class ContentService {
 		}
 	}
 	
-	public Contents findByIds(List<String> ids) throws ContentNotFoundException {
-		return repositoryService.findByIds(ids);
+	public Contents findByIds(List<String> ids) throws PaperContentNotFoundException {
+		try {
+			return repositoryService.findByIds(ids);
+		} catch (ContentNotFoundException exception) {
+			logger.error("", exception);
+			throw new PaperContentNotFoundException(0, null);
+		}
+		
 	}
 
 /*

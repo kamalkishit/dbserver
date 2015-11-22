@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.humanize.dbserver.data.Contents;
 import com.humanize.dbserver.data.Paper;
-import com.humanize.dbserver.exception.ContentNotFoundException;
+import com.humanize.dbserver.exception.PaperContentNotFoundException;
 import com.humanize.dbserver.exception.PaperCreationException;
 import com.humanize.dbserver.exception.PaperNotFoundException;
 import com.humanize.dbserver.exception.PaperUpdationException;
@@ -27,7 +27,7 @@ public class PaperService {
 		return repositoryService.update(paper);
 	}
 	
-	public Contents findByDate(String paperDate) throws PaperNotFoundException, ContentNotFoundException {
+	public Contents findByDate(String paperDate) throws PaperNotFoundException, PaperContentNotFoundException {
 		Paper paper = repositoryService.findByDate(paperDate);
 		
 		return contentService.findByIds(paper.getContentIds());

@@ -1,5 +1,6 @@
 package com.humanize.dbserver.data;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,9 +11,11 @@ public class VerificationCode {
 	@Id
 	private String id;
 
+	@NotEmpty
 	@Indexed(unique = true)
 	private String emailId;
 	
+	@NotEmpty
 	private String verificationCode;
 	
 	public VerificationCode() {
